@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Maiden Fan Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white">
+    <section class="py-12 text-center">
+        <h1 class="text-4xl font-bold text-red-600">Fan Gallery</h1>
+        <p class="mt-4">Upload your Iron Maiden concert photos and share your experiences with fellow fans!</p>
+        <input type="file" class="mt-6 bg-gray-800 px-4 py-2 rounded-lg text-white" accept="image/*">
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 px-6" id="gallery">
+            <!-- Uploaded images will appear here -->
+        </div>
+    </section>
+    <script>
+        document.querySelector('input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'w-full h-48 object-cover rounded-md';
+                    document.getElementById('gallery').appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
